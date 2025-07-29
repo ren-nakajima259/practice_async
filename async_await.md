@@ -327,3 +327,65 @@ void main() async {
 ```
 
 </details>
+
+### 問題 9
+
+**問題:** 以下の仕様を満たす非同期挨拶関数を実装してください。
+
+**仕様:**
+1. `greetAsync(String name)` 関数を実装する
+2. 関数は1秒待機してから挨拶メッセージを返す
+3. 戻り値は `'こんにちは、$name さん！'` という文字列
+4. `main` 関数で `greetAsync` を呼び出し、結果を表示する
+
+<details>
+<summary>答え（実装例）</summary>
+
+```dart
+Future<String> greetAsync(String name) async {
+  await Future.delayed(Duration(seconds: 1));
+  return 'こんにちは、$name さん！';
+}
+
+void main() async {
+  String greeting = await greetAsync('太郎');
+  print(greeting);
+}
+```
+
+</details>
+
+### 問題 10
+
+**問題:** 以下の仕様を満たす関数を実装してください。
+
+**仕様:**
+1. `divideAsync(int a, int b)` 関数を実装する
+2. bが0の場合は `Exception('0で割ることはできません')` を投げる
+3. 正常な場合は1秒待機してから `a / b` の結果を返す
+4. `main` 関数で `divideAsync(10, 0)` を呼び出し、try-catchでエラーをキャッチして適切なメッセージを表示する
+
+<details>
+<summary>答え（実装例）</summary>
+
+```dart
+Future<double> divideAsync(int a, int b) async {
+  if (b == 0) {
+    throw Exception('0で割ることはできません');
+  }
+  await Future.delayed(Duration(seconds: 1));
+  return a / b;
+}
+
+void main() async {
+  try {
+    double result = await divideAsync(10, 0);
+    print('結果: $result');
+  } catch (e) {
+    print('エラーが発生しました: $e');
+  }
+}
+```
+
+</details>
+
